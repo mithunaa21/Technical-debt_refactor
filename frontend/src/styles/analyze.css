@@ -1,0 +1,92 @@
+.analyze {
+  padding: 40px;
+}
+
+.analyze textarea {
+  width: 100%;
+  height: 200px;
+  padding: 12px;
+  font-family: monospace;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.analyze button {
+  padding: 10px 20px;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.result-box {
+  margin-top: 20px;
+  background: #111827;
+  color: #e5e7eb;
+  padding: 15px;
+  border-radius: 10px;
+}
+.analyze-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 25px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.analyze-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+textarea {
+  width: 100%;
+  height: 260px;
+  padding: 15px;
+  font-family: monospace;
+  font-size: 14px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  resize: none;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.analyze-btn,
+.clear-btn,
+.download-btn {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.analyze-btn {
+  background-color: #4f46e5;
+  color: white;
+}
+
+.clear-btn {
+  background-color: #ef4444;
+  color: white;
+}
+
+.download-btn {
+  background-color: #10b981;
+  color: white;
+}
+
+.analyze-btn:hover,
+.clear-btn:hover,
+.download-btn:hover {
+  opacity: 0.85;
+}
