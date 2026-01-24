@@ -1,0 +1,73 @@
+/* Full page center */
+.auth-container {
+  width: 100%;
+  max-width: 400px;
+  margin: 80px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
+
+/* Title */
+.auth-container h2 {
+  margin-bottom: 20px;
+  color: #1f2937;
+  font-size: 24px;
+}
+
+/* Inputs */
+.auth-container input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+}
+
+.auth-container input:focus {
+  border-color: #2563eb;
+}
+
+/* Primary button */
+.primary-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.primary-btn:hover {
+  background-color: #1e40af;
+}
+
+/* Bottom text */
+.auth-container p {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+/* Link */
+.auth-container a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.auth-container a:hover {
+  text-decoration: underline;
+}
+
+/* Page background */
+body {
+  background-color: #f3f4f6;
+  font-family: Arial, sans-serif;
+}
