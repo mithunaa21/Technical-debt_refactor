@@ -1,0 +1,1 @@
+public class InputCode { public void m(){ System.out.println("Hi"); } }
