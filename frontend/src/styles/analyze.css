@@ -1,33 +1,14 @@
+/* GLOBAL FIX */
+* {
+  box-sizing: border-box;
+}
+
+/* Page background spacing (optional) */
 .analyze {
   padding: 40px;
 }
 
-.analyze textarea {
-  width: 100%;
-  height: 200px;
-  padding: 12px;
-  font-family: monospace;
-  margin-bottom: 15px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-}
-
-.analyze button {
-  padding: 10px 20px;
-  background: #667eea;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.result-box {
-  margin-top: 20px;
-  background: #111827;
-  color: #e5e7eb;
-  padding: 15px;
-  border-radius: 10px;
-}
+/* MAIN CONTAINER */
 .analyze-container {
   max-width: 900px;
   margin: 40px auto;
@@ -37,12 +18,14 @@
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
+/* TITLE */
 .analyze-container h2 {
   text-align: center;
   margin-bottom: 20px;
 }
 
-textarea {
+/* TEXTAREA */
+.analyze-container textarea {
   width: 100%;
   height: 260px;
   padding: 15px;
@@ -51,8 +34,10 @@ textarea {
   border-radius: 8px;
   border: 1px solid #ccc;
   resize: none;
+  outline: none;
 }
 
+/* BUTTON GROUP */
 .button-group {
   display: flex;
   justify-content: center;
@@ -60,6 +45,7 @@ textarea {
   margin-top: 20px;
 }
 
+/* BUTTONS */
 .analyze-btn,
 .clear-btn,
 .download-btn {
@@ -85,8 +71,18 @@ textarea {
   color: white;
 }
 
+/* HOVER EFFECT */
 .analyze-btn:hover,
 .clear-btn:hover,
 .download-btn:hover {
   opacity: 0.85;
+}
+
+/* RESULT BOX (for later use) */
+.result-box {
+  margin-top: 20px;
+  background: #111827;
+  color: #e5e7eb;
+  padding: 15px;
+  border-radius: 10px;
 }
