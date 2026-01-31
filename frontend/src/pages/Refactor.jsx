@@ -1,77 +1,92 @@
 import "./../styles/refactor.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import axios from "axios";
 
 export default function Refactor() {
+  const location = useLocation();
+
   const [beforeCode, setBeforeCode] = useState("");
   const [afterCode, setAfterCode] = useState("");
-  const [description, setDescription] = useState("");
+  const [issues, setIssues] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [descLoading, setDescLoading] = useState(false);
 
+  /* ===============================
+     GET DATA FROM ANALYZE PAGE
+  =============================== */
+  useEffect(() => {
+    if (location.state?.originalCode) {
+      setBeforeCode(location.state.originalCode);
+    }
+    if (location.state?.issues) {
+      setIssues(location.state.issues);
+    }
+  }, [location.state]);
+
+  /* ===============================
+     CALL BACKEND REFACTOR API
+  =============================== */
   const refactorCode = async () => {
-    if (!beforeCode.trim()) return;
+    if (!beforeCode.trim()) {
+      alert("Please enter code to refactor");
+      return;
+    }
 
     try {
       setLoading(true);
-      const response = await axios.post(
+      setAfterCode("");
+
+      const payload =
+        issues && issues.length > 0
+          ? { code: beforeCode, issues }
+          : { code: beforeCode };
+
+      const res = await axios.post(
         "http://localhost:8080/api/refactor",
-        { code: beforeCode }
+        payload
       );
-      setAfterCode(response.data.refactoredCode);
-    } catch (error) {
-      console.error("Refactor failed", error);
-      alert("Refactoring failed. Check backend.");
+
+      let output = "";
+
+      if (
+        res.data &&
+        Array.isArray(res.data.refactorSuggestions) &&
+        res.data.refactorSuggestions.length > 0
+      ) {
+        output = res.data.refactorSuggestions.join("\n\n");
+      } else {
+        output = "No refactor suggestions returned";
+      }
+
+      // 🔥 CLEAN ```java ``` BLOCKS IF AI RETURNS THEM
+      output = output
+        .replace(/```java/g, "")
+        .replace(/```/g, "")
+        .trim();
+
+      setAfterCode(output);
+    } catch (err) {
+      console.error("Refactor failed:", err);
+      setAfterCode("❌ Refactor failed. Check backend logs.");
     } finally {
       setLoading(false);
     }
   };
 
-  const downloadRefactoredCode = () => {
-    if (!afterCode) return;
-
-    const blob = new Blob([afterCode], { type: "text/plain" });
-    const url = URL.createObjectURL(blob);
-
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "refactored_code.java";
-    a.click();
-
-    URL.revokeObjectURL(url);
-  };
-
-  const fetchDescription = async () => {
-    if (!beforeCode.trim()) return;
-
-    try {
-      setDescLoading(true);
-      const response = await axios.post(
-        "http://localhost:8080/api/description",
-        { code: beforeCode }
-      );
-      setDescription(response.data.description);
-    } catch (error) {
-      console.error("Description fetch failed", error);
-      alert("Fetching description failed. Check backend.");
-    } finally {
-      setDescLoading(false);
-    }
-  };
-
   return (
     <div className="refactor-container">
-      <h2>Refactoring Recommendation</h2>
+      <h2>AI Code Refactor</h2>
 
       <div className="code-grid">
         {/* BEFORE */}
         <div className="code-card">
           <h3>Before</h3>
           <textarea
-            placeholder="Paste your code here..."
+            placeholder="Paste Java code here..."
             value={beforeCode}
             onChange={(e) => setBeforeCode(e.target.value)}
           />
+
           <button
             className="action-btn"
             onClick={refactorCode}
@@ -83,37 +98,13 @@ export default function Refactor() {
 
         {/* AFTER */}
         <div className="code-card">
-          <h3>After (Refactored)</h3>
+          <h3>AI Refactored Output</h3>
           <textarea
-            placeholder="Refactored code will appear here..."
+            placeholder="AI refactored code will appear here..."
             value={afterCode}
             readOnly
           />
-          <button
-            className="action-btn"
-            onClick={downloadRefactoredCode}
-            disabled={!afterCode}
-          >
-            Download Code
-          </button>
         </div>
-      </div>
-
-      {/* Description button and box below the container */}
-      <div className="description-section">
-        <button
-          className="desc-btn"
-          onClick={fetchDescription}
-          disabled={descLoading}
-        >
-          {descLoading ? "Processing..." : "Show Description"}
-        </button>
-
-        {description && (
-          <div className="description-box">
-            <p>{description}</p>
-          </div>
-        )}
       </div>
     </div>
   );

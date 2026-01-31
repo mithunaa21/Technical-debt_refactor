@@ -1,22 +1,25 @@
-const { runJavaAnalyzer } = require("../services/javaAnalyzer");
-const { generateRefactor } = require("../services/aiService");
+const {
+  generateAIRefactorSuggestions,
+} = require("../services/aiService"); // ✅ THIS LINE WAS MISSING
 
 exports.refactorCode = async (req, res) => {
   try {
-    const { code } = req.body;
+    const { code, issues } = req.body;
 
-    // 1. Analyze technical debt
-    const issues = runJavaAnalyzer(code);
+    if (!code) {
+      return res.status(400).json({ error: "Code is required" });
+    }
 
-    // 2. Generate refactor + description
-    const aiResult = await generateRefactor(code, issues);
+    const refactoredCode = await generateAIRefactorSuggestions(
+      code,
+      issues || []
+    );
 
     res.json({
-      refactoredCode: aiResult.refactoredCode,
-      description: aiResult.description
+      refactorSuggestions: [refactoredCode],
     });
   } catch (err) {
-    console.error(err);
+    console.error("REFACTOR ERROR:", err.message);
     res.status(500).json({ error: "Refactor failed" });
   }
 };

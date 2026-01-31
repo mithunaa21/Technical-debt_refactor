@@ -1,3 +1,4 @@
+// src/pages/Home.jsx
 import { useNavigate } from "react-router-dom";
 import FeatureCard from "../components/FeatureCard";
 import "../styles/home.css";
@@ -6,89 +7,97 @@ export default function Home() {
   const navigate = useNavigate();
 
   return (
-    <div className="home">
-      {/* HERO SECTION */}
-      <div className="hero">
-        <h1>AI-Based Technical Debt Detection</h1>
-        <p>Detect technical debt. Understand it. Fix it smarter.</p>
-        <div className="hero-buttons">
-          <button className="btn btn-primary" onClick={() => navigate("/analyze")}>
-            Analyze Code
-          </button>
-          <button className="btn btn-secondary" onClick={() => navigate("/refactor")}>
-            Refactor Code
-          </button>
+    <div className="home-container">
+      {/* HERO */}
+      <header className="hero-section">
+        <div className="hero-overlay">
+          <h1>AI Technical Debt Analyzer</h1>
+          <p>
+            Detect code smells • Understand issues • Refactor smarter with AI
+          </p>
+
+          <div className="hero-actions">
+            <button
+              className="primary-btn"
+              onClick={() => navigate("/analyze")}
+            >
+              Analyze Code
+            </button>
+
+            <button
+              className="secondary-btn"
+              onClick={() => navigate("/refactor")}
+            >
+              Refactor Code
+            </button>
+          </div>
         </div>
-      </div>
+      </header>
 
       {/* FEATURES */}
-      <div className="features">
-        <FeatureCard
-          title="Detect Code Smells"
-          description="Find long methods, duplication, and bad practices."
-        />
-        <FeatureCard
-          title="AI Explanations"
-          description="Understand why the issue matters."
-        />
-        <FeatureCard
-          title="Refactoring"
-          description="Get AI-powered refactoring suggestions."
-        />
-        <FeatureCard
-          title="Visual Reports"
-          description="Charts & maintainability scores."
-        />
-      </div>
+      <section className="features-section">
+        <h2>Powerful Features</h2>
+
+        <div className="features-grid">
+          <FeatureCard
+            title="Code Smell Detection"
+            description="Detect long methods, magic numbers, complexity and bad practices."
+          />
+          <FeatureCard
+            title="AI Explanations"
+            description="Understand why issues matter with simple AI explanations."
+          />
+          <FeatureCard
+            title="Smart Refactoring"
+            description="Get clean, production-ready refactored code."
+          />
+          <FeatureCard
+            title="Professional Reports"
+            description="Download beautiful PDF reports with charts and insights."
+          />
+        </div>
+      </section>
 
       {/* HOW IT WORKS */}
-      <div className="how-it-works">
+      <section className="workflow-section">
         <h2>How It Works</h2>
-        <div className="steps">
-          <div className="step">
-            <h3>1. Upload Your Code</h3>
-            <p>Paste or upload your source code for analysis.</p>
+
+        <div className="workflow-steps">
+          <div className="step-card">
+            <span>1</span>
+            <h3>Paste Code</h3>
+            <p>Upload or paste your source code</p>
           </div>
-          <div className="step">
-            <h3>2. Detect Technical Debt</h3>
-            <p>Our AI scans for code smells, complexity, and bad practices.</p>
+
+          <div className="step-card">
+            <span>2</span>
+            <h3>Analyze</h3>
+            <p>AI detects technical debt issues</p>
           </div>
-          <div className="step">
-            <h3>3. Get Refactoring Suggestions</h3>
-            <p>Receive actionable insights and smart fixes.</p>
+
+          <div className="step-card">
+            <span>3</span>
+            <h3>Refactor</h3>
+            <p>Get clean & optimized code</p>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* WHY US */}
-      <div className="why-us">
-        <h2>Why Choose Our Tool?</h2>
-        <ul>
-          <li>✅ AI-powered insights</li>
-          <li>✅ Saves hours of manual review</li>
-          <li>✅ Improves maintainability</li>
-          <li>✅ Easy integration with GitHub</li>
-        </ul>
-      </div>
-
-      {/* TESTIMONIALS */}
-      <div className="testimonials">
-        <h2>What Developers Say</h2>
-        <blockquote>
-          “This tool helped us cut down 40% of legacy code issues in a week.” — DevOps Lead, FinTech Co.
-        </blockquote>
-        <blockquote>
-          “Finally, a smart way to tackle tech debt without drowning in refactor tickets.” — Full Stack Engineer
-        </blockquote>
-      </div>
-
-      {/* CALL TO ACTION */}
-      <div className="cta">
-        <h2>Ready to clean up your code?</h2>
-        <button className="btn btn-primary" onClick={() => navigate("/analyze")}>
+      {/* CTA */}
+      <section className="cta-section">
+        <h2>Ready to improve your code quality?</h2>
+        <button
+          className="primary-btn"
+          onClick={() => navigate("/analyze")}
+        >
           Start Free Analysis
         </button>
-      </div>
+      </section>
+
+      {/* FOOTER */}
+      <footer className="footer">
+        <p>© 2026 AI Technical Debt Analyzer</p>
+      </footer>
     </div>
   );
 }
